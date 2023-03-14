@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{601311fb-2ee0-48d5-974f-0bd9460ca6bf}</ProjectGuid>
+    <RootNamespace>Solvitaire</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>d:\boost\PREFIX\include\boost-1_81\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>d:\boost\PREFIX\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libboost_program_options-vc143-mt-gd-x64-1_81.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>d:\boost\PREFIX\include\boost-1_81\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>d:\boost\PREFIX\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libboost_program_options-vc143-mt-x64-1_81.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="input-output\input\command_line_helper.cpp" />
+    <ClInclude Include="input-output\input\command_line_helper.h" />
+    <ClInclude Include="input-output\output\log_helper.h" />
+    <ClInclude Include="game\card.h" />
+    <ClCompile Include="game\card.cpp" />
+    <ClInclude Include="input-output\input\json-parsing\deal_parser.h" />
+    <ClCompile Include="input-output\input\json-parsing\deal_parser.cpp" />
+    <ClCompile Include="solver\solver.cpp" />
+    <ClInclude Include="solver\solver.h" />
+    <ClCompile Include="game\search-state\game_state.cpp" />
+    <ClInclude Include="game\search-state\game_state.h" />
+    <ClInclude Include="game\sol_rules.h" />
+    <ClCompile Include="game\pile.cpp" />
+    <ClInclude Include="game\pile.h" />
+    <ClCompile Include="input-output\input\json-parsing\json_helper.cpp" />
+    <ClInclude Include="input-output\input\json-parsing\json_helper.h" />
+    <ClInclude Include="input-output\input\sol_preset_types.h" />
+    <ClCompile Include="input-output\input\sol_preset_types.cpp" />
+    <ClCompile Include="input-output\input\json-parsing\rules_parser.cpp" />
+    <ClInclude Include="input-output\input\json-parsing\rules_parser.h" />
+    <ClCompile Include="input-output\output\state_printer.cpp" />
+    <ClInclude Include="input-output\output\state_printer.h" />
+    <ClCompile Include="game\global_cache.cpp" />
+    <ClInclude Include="game\global_cache.h" />
+    <ClCompile Include="game\sol_rules.cpp" />
+    <ClCompile Include="evaluation\solvability_calc.cpp" />
+    <ClInclude Include="evaluation\solvability_calc.h" />
+    <ClCompile Include="evaluation\benchmark.cpp" />
+    <ClInclude Include="evaluation\benchmark.h" />
+    <ClInclude Include="..\lib\rapidjson\document.h" />
+    <ClInclude Include="..\lib\rapidjson\schema.h" />
+    <ClInclude Include="..\lib\rapidjson\stringbuffer.h" />
+    <ClCompile Include="game\search-state\game_state.legal_moves.cpp" />
+    <ClCompile Include="game\search-state\game_state.dominance_moves.cpp" />
+    <ClCompile Include="game\search-state\game_state.pile_order.cpp" />
+    <ClCompile Include="game\move.cpp" />
+    <ClInclude Include="game\move.h" />
+    <ClCompile Include="evaluation\binomial_ci.cpp" />
+    <ClInclude Include="evaluation\binomial_ci.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

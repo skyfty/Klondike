@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Klondike", "Klondike\Klondike.vcxproj", "{E1423002-9B9A-47E4-A04A-F5CF3AE681F7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Solvitaire", "Solvitaire\Solvitaire.vcxproj", "{601311FB-2EE0-48D5-974F-0BD9460CA6BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1423002-9B9A-47E4-A04A-F5CF3AE681F7}.Debug|x64.ActiveCfg = Debug|x64
+		{E1423002-9B9A-47E4-A04A-F5CF3AE681F7}.Debug|x64.Build.0 = Debug|x64
+		{E1423002-9B9A-47E4-A04A-F5CF3AE681F7}.Release|x64.ActiveCfg = Release|x64
+		{E1423002-9B9A-47E4-A04A-F5CF3AE681F7}.Release|x64.Build.0 = Release|x64
+		{601311FB-2EE0-48D5-974F-0BD9460CA6BF}.Debug|x64.ActiveCfg = Debug|x64
+		{601311FB-2EE0-48D5-974F-0BD9460CA6BF}.Debug|x64.Build.0 = Debug|x64
+		{601311FB-2EE0-48D5-974F-0BD9460CA6BF}.Release|x64.ActiveCfg = Release|x64
+		{601311FB-2EE0-48D5-974F-0BD9460CA6BF}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3F20C74-80E0-47FA-99B8-42C423388385}
+	EndGlobalSection
+EndGlobal

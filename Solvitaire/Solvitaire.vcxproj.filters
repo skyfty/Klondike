@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="evaluation\benchmark.cpp">
+      <Filter>evaluation</Filter>
+    </ClCompile>
+    <ClCompile Include="evaluation\binomial_ci.cpp">
+      <Filter>evaluation</Filter>
+    </ClCompile>
+    <ClCompile Include="evaluation\solvability_calc.cpp">
+      <Filter>evaluation</Filter>
+    </ClCompile>
+    <ClCompile Include="game\card.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="game\global_cache.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="game\move.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="game\pile.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="game\sol_rules.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="game\search-state\game_state.cpp">
+      <Filter>game\search-state</Filter>
+    </ClCompile>
+    <ClCompile Include="game\search-state\game_state.dominance_moves.cpp">
+      <Filter>game\search-state</Filter>
+    </ClCompile>
+    <ClCompile Include="game\search-state\game_state.legal_moves.cpp">
+      <Filter>game\search-state</Filter>
+    </ClCompile>
+    <ClCompile Include="game\search-state\game_state.pile_order.cpp">
+      <Filter>game\search-state</Filter>
+    </ClCompile>
+    <ClCompile Include="input-output\input\json-parsing\deal_parser.cpp">
+      <Filter>input-output\input\json-parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="input-output\input\json-parsing\json_helper.cpp">
+      <Filter>input-output\input\json-parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="input-output\input\json-parsing\rules_parser.cpp">
+      <Filter>input-output\input\json-parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="input-output\input\command_line_helper.cpp">
+      <Filter>input-output\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input-output\input\sol_preset_types.cpp">
+      <Filter>input-output\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input-output\output\state_printer.cpp">
+      <Filter>input-output\output</Filter>
+    </ClCompile>
+    <ClCompile Include="solver\solver.cpp">
+      <Filter>solver</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="evaluation\benchmark.h">
+      <Filter>evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="evaluation\binomial_ci.h">
+      <Filter>evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="evaluation\solvability_calc.h">
+      <Filter>evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="game\card.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\global_cache.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\move.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\pile.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sol_rules.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\search-state\game_state.h">
+      <Filter>game\search-state</Filter>
+    </ClInclude>
+    <ClInclude Include="input-output\input\json-parsing\deal_parser.h">
+      <Filter>input-output\input\json-parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="input-output\input\json-parsing\json_helper.h">
+      <Filter>input-output\input\json-parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="input-output\input\json-parsing\rules_parser.h">
+      <Filter>input-output\input\json-parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="input-output\input\command_line_helper.h">
+      <Filter>input-output\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input-output\input\sol_preset_types.h">
+      <Filter>input-output\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input-output\output\log_helper.h">
+      <Filter>input-output\output</Filter>
+    </ClInclude>
+    <ClInclude Include="input-output\output\state_printer.h">
+      <Filter>input-output\output</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\solver.h">
+      <Filter>solver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\stringbuffer.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\schema.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\document.h">
+      <Filter>game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="evaluation">
+      <UniqueIdentifier>{5406d506-5480-443a-9531-a83a66e9141a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{50c7ec7d-b868-4299-9625-a28fddb07997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\search-state">
+      <UniqueIdentifier>{4b599d90-ce41-4b30-8868-9244bd9aff87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input-output">
+      <UniqueIdentifier>{345073bb-4c72-47e2-9d85-c88f7b752191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input-output\input">
+      <UniqueIdentifier>{f5bf12c4-f117-4a3f-af5d-3ef4c9839f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input-output\input\json-parsing">
+      <UniqueIdentifier>{acc01a4f-d4a8-4942-955e-ecc07b136fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input-output\output">
+      <UniqueIdentifier>{520b50ca-6e85-4964-8947-449f9b88ba32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="solver">
+      <UniqueIdentifier>{38d63cf6-22c1-4407-9ab2-bc095121b054}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
