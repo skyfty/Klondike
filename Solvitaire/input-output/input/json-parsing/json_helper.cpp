@@ -37,22 +37,30 @@ using boost::property_tree::write_json;
 Document json_helper::get_file_json(const string& filename) {
     // Reads the file into a string
     std::ifstream ifstr(filename);
-    std::stringstream buf;
-    buf << ifstr.rdbuf();
 
     if (ifstr.fail()) {
         throw runtime_error("could not read file " + filename);
-    } else {
-        Document d;
-
-        d.Parse(buf.str().c_str());
-        if (d.HasParseError()) {
-            throw runtime_error(filename + " not valid json");
-        } else {
-            return d;
-        }
+    }
+    else {
+        return get_file_json(ifstr);
     }
 }
+
+Document json_helper::get_file_json(std::istream& ifstr) {
+    std::stringstream buf;
+    buf << ifstr.rdbuf();
+
+    Document d;
+
+    d.Parse(buf.str().c_str());
+    if (d.HasParseError()) {
+        throw runtime_error(" not valid json");
+    }
+    else {
+        return d;
+    }
+}
+
 
 void json_helper::json_parse_err(const string& msg) {
     string err_msg = "Error in JSON doc: " + msg;
@@ -80,6 +88,10 @@ const string json_helper::schema_err_str(const SchemaValidator& validator) {
 }
 
 void json_helper::print_game_state_as_json(const game_state& gs) {
+    print_game_state_as_json(cout, gs);
+}
+
+void json_helper::print_game_state_as_json(std::ostream& os, const game_state& gs) {
     ptree pt;
     if (!gs.tableau_piles.empty()) pt.add_child("tableau piles", piles_to_ptree(gs, gs.tableau_piles));
     if (!gs.cells.empty()) pt.add_child("cells", piles_to_ptree(gs, gs.cells));
@@ -95,8 +107,9 @@ void json_helper::print_game_state_as_json(const game_state& gs) {
     }
     if (gs.rules.hole) pt.add_child("hole", card_to_ptree(gs.piles[gs.hole][0]));
 
-    write_json (cout, pt);
+    write_json(os, pt);
 }
+
 
 ptree json_helper::piles_to_ptree(const game_state& gs, const std::list<pile::ref>& piles) {
     ptree pt;

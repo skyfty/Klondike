@@ -39,6 +39,7 @@ public:
     int get_random_deal();
     bool get_classify();
     bool get_deal_only();
+    bool get_result_only();
     int get_solvability();
     uint32_t get_cores();
     bool get_available_game_types();
@@ -74,6 +75,7 @@ private:
     bool help;
     bool classify;
     bool deal_only;
+    bool result_only;
     int solvability;
     std::vector<int> resume;
     uint32_t cores;

@@ -30,6 +30,8 @@
 #include "solver/solver.h"
 #include "evaluation/solvability_calc.h"
 #include "evaluation/benchmark.h"
+#include <windows.h>
+#include "solvitaire.h"
 
 using namespace rapidjson;
 
@@ -133,6 +135,15 @@ const optional<sol_rules> gen_rules(command_line_helper& clh) {
     }
 }
 
+void gen_game_deal(int seed, const char *rule_file, gen_game_deal_callback cb, solve_state* data) {
+    optional<sol_rules> rules = rules_parser::from_file(rule_file);
+    game_state gs(*rules, seed, game_state::streamliner_options::NONE);
+    std::stringstream ss;
+    json_helper::print_game_state_as_json(ss, gs);
+    std::string game_state = ss.str();
+    cb(game_state.c_str(), game_state.length(), data);
+}
+
 void solve_random_game(int seed, const sol_rules& rules, command_line_helper& clh) {
     if (!clh.get_classify())
         LOG_INFO ("Attempting to solve with seed: " << seed << "...");
@@ -142,9 +153,14 @@ void solve_random_game(int seed, const sol_rules& rules, command_line_helper& cl
 void solve_input_files(const vector<string> input_files, const sol_rules& rules, command_line_helper& clh) {
     for (const string& input_file : input_files) {
         try {
+            Document in_doc;
             // Reads in the input file to a json doc
-            const Document in_doc = json_helper::get_file_json(input_file);
-
+            if (input_file == "cin") {
+                in_doc = json_helper::get_file_json(std::cin);
+            }
+            else {
+                in_doc = json_helper::get_file_json(input_file);
+            }
             LOG_INFO ("Attempting to solve " << input_file << "...");
             solve_game(rules, clh, none, in_doc);
 
@@ -153,6 +169,30 @@ void solve_input_files(const vector<string> input_files, const sol_rules& rules,
             errmsg += error.what();
             LOG_ERROR(errmsg);
         }
+    }
+}
+
+void solve_buffer(const char* rule_file, const char *buff, size_t number, uint64_t timeout, solve_callback cb, solve_state* data) {
+    solve_state state;
+    try {
+        Document d;
+        d.Parse(buff);
+        if (d.HasParseError()) {
+            throw runtime_error(" not valid json");
+        }
+        const optional<sol_rules> rules = rules_parser::from_file(rule_file);
+        auto solution = solve_game(*rules, timeout, 100000000, game_state::streamliner_options::NONE, none, d);
+        if (solution.second.sol_type == solver::result::type::SOLVED) {
+            state.dominance_moves = solution.second.dominance_moves;
+            state.sol_type = solve_state::type::SOLVED;
+        }
+        cb(state, data);
+    }
+    catch (const runtime_error& error) {
+        string errmsg = "Error in rules generation: ";
+        errmsg += error.what();
+        std::cerr << errmsg << std::endl;
+        cb(state, data);
     }
 }
 
@@ -197,12 +237,13 @@ void solve_game(const sol_rules& rules, command_line_helper& clh, optional<int> 
         cout << "\n";
     } else {
         pair<solver, solver::result> s = run_again ? *streamliner_solution : solution;
-
         if (s.second.sol_type == solver::result::type::SOLVED) {
             s.first.print_solution();
-        } else {
+        }
+        else {
             cout << "Deal:\n" << s.first.init_state << "\n";
         }
+        
         cout << s.second;
     }
     cout.flush();

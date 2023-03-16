@@ -53,7 +53,7 @@ static bool sigint = false;
 
 void sigint_handler(int i) {
     // So it doesn't complain about unused param
-    sigint = i == 1 ? true : true;
+    sigint = i == 1 ? true : false;
 }
 
 solver::solver(const game_state& gs, uint64_t cache_capacity)
@@ -103,12 +103,10 @@ solver::result::type solver::dfs(boost::optional<clock::time_point> end_time) {
             return result::type::TERMINATED;
         }
 
-#ifndef NDEBUG
         if (current_node->mv.dominance_move) {
-            LOG_DEBUG("(dominance move)");
+            LOG_INFO("(dominance move)");
         }
-        LOG_DEBUG(state);
-#endif
+        LOG_INFO(state);
 
         // If there is a dominance move available, adds it to the search tree
         // and repeats. Doesn't cache the state.
@@ -231,16 +229,16 @@ void solver::print_solution() const {
     auto i = begin(frontier);
     game_state state_copy = init_state;
 
-    cout << "Solution:\n";
-    cout << state_copy << "\n";
+    clog << "Solution:\n";
+    clog << state_copy << "\n";
 
     if (res.states_searched > 1) {
         while (++i != end(frontier)) {
             state_copy.make_move(i->mv);
-            cout << state_copy << "\n";
+            clog << state_copy << "\n";
         }
     }
-    cout << "\n";
+    clog << "\n";
 }
 
 std::ostream& operator<< (std::ostream& out, const solver::result::type& rt) {

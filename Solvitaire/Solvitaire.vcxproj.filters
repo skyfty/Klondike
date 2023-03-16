@@ -121,6 +121,7 @@
     <ClInclude Include="..\lib\rapidjson\document.h">
       <Filter>game</Filter>
     </ClInclude>
+    <ClInclude Include="solvitaire.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="evaluation">
@@ -147,5 +148,8 @@
     <Filter Include="solver">
       <UniqueIdentifier>{38d63cf6-22c1-4407-9ab2-bc095121b054}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source.def" />
   </ItemGroup>
 </Project>

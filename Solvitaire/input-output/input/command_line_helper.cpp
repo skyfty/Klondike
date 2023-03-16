@@ -79,6 +79,7 @@ command_line_helper::command_line_helper()
                           "supplied solitaire game. Must supply "
                           "either 'random', 'benchmark', 'solvability' or list of deals to be "
                           "solved.")
+            ("result-only", "outputs the result deal for a given game type")
             ("deal-only", "outputs the starting deal for a given game type & random seed as json");
 
     po::options_description hidden_options("Hidden options");
@@ -121,7 +122,7 @@ bool command_line_helper::parse(int argc, const char* argv[]) {
     classify = (vm.count("classify") != 0);
 
     deal_only = (vm.count("deal-only") != 0);
-
+    result_only = (vm.count("result-only") != 0);
     if (vm.count("input-files")) {
         input_files = vm["input-files"].as<vector<string>>();
     }
@@ -303,6 +304,11 @@ bool command_line_helper::get_classify() {
 bool command_line_helper::get_deal_only() {
     return deal_only;
 }
+
+bool command_line_helper::get_result_only() {
+    return result_only;
+}
+
 
 uint64_t command_line_helper::get_cache_capacity() {
     return cache_capacity;

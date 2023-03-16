@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Klondike.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KlondikeDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -30,15 +24,15 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Klondike.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Klondike.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="KlondikeDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
@@ -51,12 +45,10 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\Klondike.rc2">
+    <Image Include="small.ico">
       <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\Klondike.ico">
+    </Image>
+    <Image Include="Klondike.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

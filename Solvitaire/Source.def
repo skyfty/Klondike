@@ -1,0 +1,5 @@
+LIBRARY
+EXPORTS
+    gen_game_deal
+    solve_buffer
+    sigint_handler

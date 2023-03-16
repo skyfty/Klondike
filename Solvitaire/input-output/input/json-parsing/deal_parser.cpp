@@ -90,14 +90,14 @@ void deal_parser::parse(game_state &gs, const rapidjson::Document& doc) {
         }
     }
 
-    Document d;
-    d.Parse(deal_schema_json().c_str());
-    assert(!d.HasParseError());
-    SchemaDocument sd(d);
-    SchemaValidator validator(sd);
-    if(!doc.Accept(validator)) {
-        throw runtime_error(json_helper::schema_err_str(validator));
-    }
+    //Document d;
+    //d.Parse(deal_schema_json().c_str());
+    //assert(!d.HasParseError());
+    //SchemaDocument sd(d);
+    //SchemaValidator validator(sd);
+    //if(!doc.Accept(validator)) {
+    //    throw runtime_error(json_helper::schema_err_str(validator));
+    //}
 }
 
 string deal_parser::deal_schema_json() {
@@ -125,7 +125,7 @@ string deal_parser::deal_schema_json() {
     "tableau piles": {
       "type": "array", "items": {"$ref": "#/definitions/cardarray"}
     },
-    "foundations": {"$ref": "#/definitions/cardarray"},
+    "foundations": {"type": "array", "items": {"$ref": "#/definitions/cardarraywithempty"}},
     "sequences": {
       "type": "array", "items": {"$ref": "#/definitions/cardarraywithempty"}
     },
@@ -208,6 +208,9 @@ void deal_parser::parse_stock(game_state &gs, const Document& doc) {
 void deal_parser::parse_waste(game_state &gs, const Document& doc) {
     if (doc.HasMember("waste")) {
         const Value &json_waste = doc["waste"];
+        if (!json_waste.IsArray()) {
+            return;
+        }
         assert(json_waste.IsArray());
 
         for (const Value& json_card : json_waste.GetArray()) {
@@ -286,7 +289,10 @@ bool deal_parser::parse_foundations(game_state &gs, const rapidjson::Document& d
     card c;
     for (auto j = begin(json_foundations.GetArray()); j != end(json_foundations.GetArray()); j++) {
         assert(j->IsString());
-        c = card(j->GetString());
+        std::string f = j->GetString();
+        if (f.empty()) {
+            continue;
+        }
         gs.place_card(gs.foundations[c.get_suit()], c);
     }
 
