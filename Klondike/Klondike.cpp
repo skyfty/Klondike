@@ -159,12 +159,12 @@ INT_PTR CALLBACK MainWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
         lvc.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
         lvc.fmt = LVCFMT_LEFT;
         lvc.iSubItem = 0;
-        lvc.pszText = (LPWSTR)L"Game";
-        lvc.cx = 300;  
+        lvc.pszText = (LPWSTR)L"ÅÆ¾Ö";
+        lvc.cx = 340;  
         ListView_InsertColumn(ListWnd, 0, &lvc);
 
         lvc.iSubItem = 1;
-        lvc.pszText = (LPWSTR)L"Steps";
+        lvc.pszText = (LPWSTR)L"²½Êý";
         lvc.cx = 50;
         ListView_InsertColumn(ListWnd, 1, &lvc);
 
