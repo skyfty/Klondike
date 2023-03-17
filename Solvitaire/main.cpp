@@ -185,6 +185,7 @@ void solve_buffer(const char* rule_file, const char *buff, size_t number, uint64
         if (solution.second.sol_type == solver::result::type::SOLVED) {
             state.dominance_moves = solution.second.dominance_moves;
             state.sol_type = solve_state::type::SOLVED;
+            state.time = solution.second.time;
         }
         cb(state, data);
     }

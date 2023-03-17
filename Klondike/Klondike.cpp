@@ -66,6 +66,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 struct GameDeal {
     std::string game;
     uint64_t moves;
+    std::chrono::milliseconds time;
+
 };
 
 auto MakeStorage(const char* file_path) {
@@ -102,6 +104,7 @@ void on_gen_game_deal(const char* buffer, size_t number, solve_state *state) {
         GameDeal gd;
         gd.game = game_buffer;
         gd.moves = state->dominance_moves;
+        gd.time = state->time;
         storage->insert(gd);
         SendMessage(MainWnd, WM_SOLVE_SETP, 0, (LPARAM)&gd);
     }
@@ -135,9 +138,29 @@ INT_PTR CALLBACK MainWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
         std::wstring game = boost::from_utf8(gd->game);
         lvI.pszText = (LPWSTR)game.c_str();
         lvI.iItem = ListView_InsertItem(ListWnd, &lvI);
-        std::wstring steps = boost::str(boost::wformat(L"%1%") % gd->moves);
-        LPWSTR steps_text = (LPWSTR)steps.c_str();
-        ListView_SetItemText(ListWnd, lvI.iItem, 1, steps_text);
+        {
+            std::wstring steps = boost::str(boost::wformat(L"%1%") % gd->moves);
+            
+            LPWSTR steps_text = (LPWSTR)steps.c_str();
+            ListView_SetItemText(ListWnd, lvI.iItem, 1, steps_text);
+        }
+        {
+            std::wstring steps;
+            auto time_count = gd->time.count();
+            if (time_count < 1000) {
+                steps = boost::str(boost::wformat(L"%1%毫秒") % time_count);
+            }
+            else if(time_count < 1000 * 60) {
+                time_count = std::chrono::duration_cast<std::chrono::seconds>(gd->time).count();
+                steps = boost::str(boost::wformat(L"%1%秒") % time_count);
+            } else {
+                time_count = std::chrono::duration_cast<std::chrono::minutes>(gd->time).count();
+                steps = boost::str(boost::wformat(L"%1%分") % time_count);
+            }
+            LPWSTR steps_text = (LPWSTR)steps.c_str();
+            ListView_SetItemText(ListWnd, lvI.iItem, 2, steps_text);
+        }
+   
         ListView_EnsureVisible(ListWnd, lvI.iItem, FALSE);
 
         SendMessageA(ProgressWnd, PBM_STEPIT, 0, 0);
@@ -160,13 +183,18 @@ INT_PTR CALLBACK MainWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
         lvc.fmt = LVCFMT_LEFT;
         lvc.iSubItem = 0;
         lvc.pszText = (LPWSTR)L"牌局";
-        lvc.cx = 340;  
+        lvc.cx = 310;  
         ListView_InsertColumn(ListWnd, 0, &lvc);
 
         lvc.iSubItem = 1;
         lvc.pszText = (LPWSTR)L"步数";
         lvc.cx = 50;
         ListView_InsertColumn(ListWnd, 1, &lvc);
+
+        lvc.iSubItem = 2;
+        lvc.pszText = (LPWSTR)L"耗时";
+        lvc.cx = 50;
+        ListView_InsertColumn(ListWnd, 2, &lvc);
 
         storage.reset(new DbStorage(MakeStorage(database_file_path)));
 
@@ -175,7 +203,7 @@ INT_PTR CALLBACK MainWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
     case WM_SOLVE_COMPLETE: {
         terminate_solve(false);
         work_thread.release();
-        SetDlgItemTextA(hWnd, IDOK, "开始");
+        SetDlgItemText(hWnd, IDOK, L"开始");
         break;
     }
     case WM_COMMAND:
@@ -191,7 +219,7 @@ INT_PTR CALLBACK MainWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
                     SendMessage(ProgressWnd, PBM_SETRANGE, 0, MAKELPARAM(0, number));
                     SendMessage(ProgressWnd, PBM_SETPOS, 0, 0);
                     work_thread.reset(new std::thread(std::bind(&LunchWorkThread, number)));
-                    SetDlgItemTextA(hWnd, IDOK, "停止");
+                    SetDlgItemText(hWnd, IDOK, L"停止");
                 }
             }
             return (INT_PTR)TRUE;
@@ -224,3 +252,5 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     }
     return (INT_PTR)FALSE;
 }
+
+
