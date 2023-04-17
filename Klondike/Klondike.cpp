@@ -130,6 +130,7 @@ INT_PTR CALLBACK MainWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
     {
     case WM_SOLVE_SETP: {
         GameDeal *gd = (GameDeal*)lParam;
+        
         LVITEMW lvI = { 0 };
         lvI.mask = LVIF_TEXT | LVIF_PARAM;// | LVIF_NORECOMPUTE;// | LVIF_IMAGE;
         lvI.iItem = 0;
